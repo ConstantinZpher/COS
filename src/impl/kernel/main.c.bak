@@ -1,0 +1,44 @@
+#include "AES.h"
+#include "print.h"
+#include "IDT.c"
+
+struct Address {
+    uint8_t value;
+};
+
+unsigned char* VideoBuffer = (unsigned char*) 0xB8000;
+
+void kernel_main() {
+    print_set_color(PRINT_COLOR_WHITE, PRINT_COLOR_BLACK);
+    print_clear();
+    print_str("                        ");
+    print_str("Welcome to the COS 64-bit kernel\n");
+    //print_set_color(PRINT_COLOR_BLACK, PRINT_COLOR_LIGHT_BLUE);
+    print_str("                                    ");
+    print_set_color(PRINT_COLOR_WHITE, PRINT_COLOR_BLACK);
+    print_str("Beta 1.0\n");
+    print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
+    print_str("Initializing AES\n");
+    InitAES();
+    if(GetState() == 1) {
+        print_str(GetAuth());
+        print_set_color(PRINT_COLOR_LIGHT_GREEN, PRINT_COLOR_BLACK);
+        print_str("\nAES Ready");
+    }
+    /*int offset = 0;
+    int timer = 0;
+    int colorOffset = 0;
+    while(1) {
+        if(timer > 900000) {
+            VideoBuffer[offset] = 0;
+            VideoBuffer[offset + 1] = (unsigned char)(colorOffset);
+            if(offset > 4000) {
+                offset = 0;
+                colorOffset += 19;
+            } else {
+                offset += 2;
+            }
+            timer = 0;
+        } else { timer++; }
+    }*/
+}

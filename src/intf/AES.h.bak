@@ -1,0 +1,5 @@
+#pragma once
+
+char* GetAuth();
+int GetState();
+void InitAES();
